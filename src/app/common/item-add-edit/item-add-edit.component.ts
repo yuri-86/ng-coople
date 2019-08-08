@@ -55,12 +55,11 @@ export class ItemAddEditComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       if (data && data[0] && data[1]) {
         const {name, address, id}: Address = data[0];
-        const country = data[1].find(value => value.name === address.country);
         this.formGroup.patchValue({
           name,
           street: address.street,
           city: address.city,
-          country: country.name,
+          country: address.country,
           zip: address.zip
         });
         this.snackBarAction = 'The address has been updated';
@@ -125,17 +124,6 @@ export class ItemAddEditComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, action, {
       duration: 3000
     });
-  }
-
-  protected scrollToTarget(selector: string) {
-    const el: HTMLElement | null = this.element.nativeElement.querySelector(
-      selector
-    );
-    if (el) {
-      setTimeout(() => {
-        el.scrollIntoView({behavior: 'smooth'});
-      }, 100);
-    }
   }
 
 }
