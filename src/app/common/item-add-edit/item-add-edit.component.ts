@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
 import {untilDestroyed} from 'ngx-take-until-destroy';
@@ -32,8 +32,7 @@ export class ItemAddEditComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private element: ElementRef
+    private snackBar: MatSnackBar
   ) {
   }
 
