@@ -1,0 +1,9 @@
+<section class="item" *ngIf="item">
+  <h1 class="item__title">
+    {{item.name}}
+  </h1>
+  <p class="item__address-title">Address:</p>
+  <p class="item__address">{{item.address | address}}</p>
+  <p class="item__edit-btn" (click)="editAddress()">Edit Address</p>
+</section>
+

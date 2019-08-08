@@ -1,0 +1,8 @@
+<div class="loadable-content" *ngIf="!loadable || loadable.isLoading">
+  <div class="loadable-content__loader lds-hourglass"><!-- please be patient --></div>
+</div>
+<ng-container *ngIf="loadable">
+  <div class="loadable-content__error" *ngIf="loadable.error">{{loadable?.error?.message || 'Oops!'}}</div>
+  <ng-content *ngIf="loadable.isLoaded && !loadable.error"></ng-content>
+</ng-container>
+

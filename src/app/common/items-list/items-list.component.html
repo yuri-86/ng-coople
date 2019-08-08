@@ -1,0 +1,6 @@
+<app-loadable-content [loadable]="loadableAddressList$ | async">
+  <section class="items-list" *ngIf="items">
+    <h1 class="items-list__title">List of addresses</h1>
+    <app-item class="items-list__item" *ngFor="let item of items" [item]="item"></app-item>
+  </section>
+</app-loadable-content>

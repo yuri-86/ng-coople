@@ -1,0 +1,9 @@
+@import "mixin";
+@import "variables";
+
+.header {
+  width: 100%;
+  height: $headerHeight;
+  background: url("/assets/images/coople-logo.png") #fff no-repeat center center/256px 86px;
+  @include box-shadow(0 3px 6px rgba(0, 0, 0, 0.23));
+}

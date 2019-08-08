@@ -1,0 +1,15 @@
+@import "mixin";
+@import "variables";
+
+.items-list {
+  display: grid;
+  grid-row-gap: 20px;
+
+  &__title {
+    justify-self: center;
+    font-family: $titleFontFamily;
+  }
+
+  &__item {
+  }
+}

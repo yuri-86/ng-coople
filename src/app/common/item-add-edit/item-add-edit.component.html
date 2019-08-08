@@ -1,0 +1,30 @@
+<form class="item-add-edit" #formDirective="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()"
+      *ngIf="formGroup">
+  <h3 class="item-add-edit__title">{{title}}</h3>
+  <mat-form-field class="item-add-edit__item">
+    <input matInput placeholder="Name" formControlName="name" type="text">
+    <mat-error>{{onError('name')}}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="item-add-edit__item">
+    <input matInput placeholder="Street" formControlName="street" type="text">
+    <mat-error>{{onError('street')}}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="item-add-edit__item">
+    <input matInput placeholder="City" formControlName="city" type="text">
+    <mat-error>{{onError('city')}}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="item-add-edit__item">
+    <mat-label>Country</mat-label>
+    <select formControlName="country" matNativeControl required>
+      <option [value]="country.name" *ngFor="let country of countries$ | async" [innerHTML]="country.name"></option>
+    </select>
+    <mat-error>{{onError('country')}}</mat-error>
+  </mat-form-field>
+  <mat-form-field class="item-add-edit__item">
+    <input matInput placeholder="Zip" formControlName="zip" type="text">
+    <mat-error>{{onError('zip')}}</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="item-add-edit__btn" type="submit">
+    {{buttonName}}
+  </button>
+</form>

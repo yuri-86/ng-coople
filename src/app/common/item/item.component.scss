@@ -1,0 +1,39 @@
+@import "mixin";
+
+:host {
+  padding: 20px 30px;
+  @include box-shadow(0 3px 6px rgba(0, 0, 0, 0.23));
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-row-gap: 10px;
+  grid-column-gap: 5px;
+
+  &__title {
+    grid-column: 1/-1;
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+  }
+
+  &__address-title {
+    font-family: 'Lato', sans-serif;
+  }
+
+  &__address {
+    font-family: 'Lato', sans-serif;
+  }
+
+  &__edit-btn {
+    grid-column: 1/-1;
+    justify-self: end;
+    color: #636ee7;
+    cursor: pointer;
+    @include opacity(.7);
+
+    &:hover {
+      @include opacity(1);
+    }
+  }
+}

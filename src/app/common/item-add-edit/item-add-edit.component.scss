@@ -1,0 +1,25 @@
+@import "mixin";
+@import "variables";
+
+.item-add-edit {
+  display: grid;
+  justify-content: stretch;
+  max-width: 500px;
+  margin: auto;
+  padding: 30px 40px;
+  @include box-shadow(0 3px 6px rgba(0, 0, 0, 0.23));
+
+  &__title {
+    font-family: $titleFontFamily;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  &__item {
+
+  }
+
+  &__btn {
+    margin-top: 10px;
+  }
+}

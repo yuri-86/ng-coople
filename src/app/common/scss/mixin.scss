@@ -1,0 +1,199 @@
+/*
+Usage:
+@include border-radius(100%);
+*/
+@mixin border-radius($borderRadius) {
+    -webkit-border-radius: $borderRadius;
+    -moz-border-radius: $borderRadius;
+    border-radius: $borderRadius;
+}
+
+/*
+Usage:
+@include media-queries(tablet) {
+  body {
+    min-width: 768px;
+  }
+}
+*/
+@mixin media-queries($point) {
+    @if $point == desktop {
+        @media screen and(min-width: 1200px) {
+            @content;
+        }
+    }
+    @else if $point == tablet {
+      @media screen and (min-width: 768px) and (max-width: 1199px) {
+        @content;
+      }
+    }
+    @else if $point == mobile {
+      @media screen and(max-width: 767px) {
+        @content;
+      }
+    }
+    @else if $point == from-tablet {
+        @media screen and (min-width: 768px) {
+            @content;
+        }
+    }
+    @else if $point == mobile-tablet {
+        @media screen and (max-width: 1199px) {
+            @content;
+        }
+    }
+}
+
+/*
+Usage:
+@include blur(5px);
+*/
+@mixin blur($value: 0) {
+    -webkit-filter: blur($value);
+    -moz-filter: blur($value);
+    -o-filter: blur($value);
+    -ms-filter: blur($value);
+    filter: blur($value);
+}
+
+/*
+Non selectable element
+Usage:
+@include unselectable;
+*/
+@mixin unselectable {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+/*
+Usage:
+@include transform(rotate(0deg));
+*/
+@mixin transform($value) {
+    -webkit-transform: $value;
+    -ms-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
+
+/*
+Animations and keyframes
+Usage
+@include keyframes(slide-down) {
+  0% { opacity: 1; }
+  90% { opacity: 0; }
+}
+*/
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+/*
+Usage:
+@include animation('slide-down 5s 3');
+*/
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+/*
+Transitions
+Usage:
+@include transition(color .3s ease);
+*/
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+/*
+Cross browser opacity
+Usage:
+@include opacity(0.8);
+*/
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+/*
+Usage:
+.container-with-floated-children {
+  @extend %clearfix;
+}
+*/
+%clearfix {
+    *zoom: 1;
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/*
+Unified font size with fallback for unsupported browsers
+Usage:
+@include font-size(14px)
+*/
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+    font-size: calculateRem($size);
+}
+
+/*
+Usage:
+@include outline(none)
+*/
+@mixin outline($value: none) {
+    -webkit-touch-callout: $value;
+    -webkit-user-select: $value;
+    -khtml-user-select: $value;
+    -moz-user-select: $value;
+    -ms-user-select: $value;
+    user-select: $value;
+    outline: $value;
+}
+
+/*
+Usage:
+@include box-shadow(0 2px 6px 0 rgba(0, 0, 0, 0.3))
+*/
+@mixin box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
