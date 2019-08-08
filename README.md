@@ -16,7 +16,7 @@
 * By clicking on the address item, edit block will get prefilled and you can modify the data
 * List of addresses should show address modifications only after add/edit address block form submit
 
-##Prerequisites
+## Prerequisites
 
 Before you begin, make sure your development environment includes Node.js® and an npm package manager.
 
