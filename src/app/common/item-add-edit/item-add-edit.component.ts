@@ -1,4 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
 import {untilDestroyed} from 'ngx-take-until-destroy';
@@ -78,7 +84,6 @@ export class ItemAddEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.formGroup.valid) {
       const {name, street, city, country, zip} = this.formGroup.value;
-      console.log('c - ', country);
       if (this.addressId) {
         this.store.dispatch(new AddressEdit(this.addressId, {
           id: this.addressId,

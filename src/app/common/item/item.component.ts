@@ -1,4 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 import {Address} from '../../shared/model/address.model';
 import {Store} from '@ngxs/store';
 import {AddressFormUpdate} from '../../shared/state/adress-list.actions';
@@ -25,6 +30,6 @@ export class ItemComponent implements OnInit {
   }
 
   private scroll() {
-    window.scrollTo({top: 0, behavior: 'smooth'});;
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 }
