@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Address} from '../../shared/model/address.model';
 import {AddressListState} from '../../shared/state/address-list.state';
 import {Observable} from 'rxjs';
@@ -11,7 +11,7 @@ import {Select} from '@ngxs/store';
   styleUrls: ['./items-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemsListComponent implements OnInit {
+export class ItemsListComponent {
   @Select(AddressListState.loadableAddressList)
   loadableAddressList$: Observable<Loadable<Address[]> | null>;
 
@@ -19,9 +19,6 @@ export class ItemsListComponent implements OnInit {
   items: Address[];
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 
 }
