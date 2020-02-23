@@ -8,7 +8,7 @@ import {
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
 import {untilDestroyed} from 'ngx-take-until-destroy';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Address} from '../../shared/model/address.model';
 import {AddressAdd, AddressEdit} from '../../shared/state/adress-list.actions';
 import {AddressListState} from '../../shared/state/address-list.state';
@@ -26,7 +26,7 @@ export class ItemAddEditComponent implements OnInit, OnDestroy {
   @Select(CountriesState.fetchCountries)
   countries$: Observable<Country[]>;
 
-  @ViewChild('formDirective', {static: false})
+  @ViewChild('formDirective')
   formDirective: NgForm;
 
   title = 'Address';

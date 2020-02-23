@@ -9,7 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {AddressPipe} from '../pipes/address.pipe';
 import {ItemAddEditComponent} from '../item-add-edit/item-add-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule, MatSnackBarModule} from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoadableModule} from '../../shared/loadable/loadable.module';
 

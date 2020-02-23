@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ItemAddEditComponent } from './item-add-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule, MatSnackBarModule} from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {NgxsModule} from '@ngxs/store';
 import {AddressListState} from '../../shared/state/address-list.state';
 import {HttpClientModule} from '@angular/common/http';
