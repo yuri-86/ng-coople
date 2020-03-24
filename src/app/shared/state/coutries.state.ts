@@ -5,6 +5,7 @@ import {asapScheduler, of} from 'rxjs';
 import {Country} from '../../../assets/mockup/countries';
 import {LoadCountries, LoadCountriesError, LoadCountriesSuccess} from './countries.actions';
 import {CountriesMockService} from '../api/countries/countries-mock.service';
+import {Injectable} from '@angular/core';
 
 export interface CountriesStateModel {
   countries: Loadable<Country[]>;
@@ -17,6 +18,7 @@ export interface CountriesStateModel {
   }
 })
 
+@Injectable()
 export class CountriesState implements NgxsOnInit {
 
   constructor(protected service: CountriesMockService) {

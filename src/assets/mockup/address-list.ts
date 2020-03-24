@@ -1,4 +1,6 @@
 import {Address} from '../../app/shared/model/address.model';
+import {generateEntryPoints} from "@angular-devkit/build-angular/src/angular-cli-files/utilities/package-chunk-sort";
+import {Observable, of} from 'rxjs';
 
 export const addressList: Address[] = [
   {
@@ -42,3 +44,17 @@ export const addressList: Address[] = [
     }
   }
 ];
+
+const randomIntFromInterval = (min, max): number => Math.floor(Math.random() * (max - min + 1) + min);
+
+export const generateList = (): Address[] => {
+  const result: Address[] = [];
+  for (let i = 0; i < 100; i++) {
+    result.push(addressList[randomIntFromInterval(0, addressList.length - 1)]);
+  }
+  return result;
+};
+
+export const generateListStream = (): Observable<Address[]> => {
+  return of(generateList());
+};

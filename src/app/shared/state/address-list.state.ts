@@ -1,17 +1,25 @@
 import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {Address} from '../model/address.model';
-import {generateLoadableError, Loadable, onLoadableError, onLoadableInit, onLoadableLoad, onLoadableSuccess} from '../model/loadable.model';
+import {
+  generateLoadableError,
+  Loadable,
+  onLoadableError,
+  onLoadableInit,
+  onLoadableLoad,
+  onLoadableSuccess
+} from '../model/loadable.model';
 import {
   AddressAdd,
   AddressEdit, AddressFormSuccess,
   AddressFormUpdate,
   LoadAddressList,
   LoadAddressListError,
-  LoadAddressListSuccess
+  LoadAddressListSuccess, LoadStreamAddressList, LoadStreamAddressListSuccess, LoadStreamLoadingAddressList
 } from './adress-list.actions';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, finalize, map} from 'rxjs/operators';
 import {asapScheduler, of} from 'rxjs';
 import {AddressListMockService} from '../api/address-list/address-list-mock.service';
+import {Injectable} from "@angular/core";
 
 export interface AddressListStateModel {
   addressList: Loadable<Address[]>;
@@ -22,10 +30,11 @@ export interface AddressListStateModel {
   name: 'addressList',
   defaults: {
     addressList: onLoadableInit(),
-    addressForm: null
+    addressForm: undefined
   }
 })
 
+@Injectable()
 export class AddressListState implements NgxsOnInit {
 
   constructor(protected service: AddressListMockService) {
@@ -94,6 +103,22 @@ export class AddressListState implements NgxsOnInit {
     return this.remoteAddressList(ctx);
   }
 
+  @Action(LoadStreamAddressList, {cancelUncompleted: true})
+  loadStreamAddressList(ctx: StateContext<AddressListStateModel>) {
+    ctx.patchState({
+      addressList: onLoadableSuccess<Address[]>()
+    });
+
+    return this.remoteStreamAddressList(ctx);
+  }
+
+  @Action(LoadStreamLoadingAddressList, {cancelUncompleted: true})
+  loadStreamLoadingAddressList(ctx: StateContext<AddressListStateModel>, {payload}) {
+    ctx.patchState({
+      addressList: onLoadableSuccess<Address[]>(payload)
+    });
+  }
+
   @Action(LoadAddressListSuccess, {cancelUncompleted: true})
   loadAddressListSuccess(ctx: StateContext<AddressListStateModel>, {payload}: LoadAddressListSuccess) {
     ctx.patchState({
@@ -127,7 +152,30 @@ export class AddressListState implements NgxsOnInit {
       );
   }
 
+  protected remoteStreamAddressList(ctx: StateContext<AddressListStateModel>) {
+    return this.service
+      .fetchStreamAddressList().pipe(
+        map(data => {
+          asapScheduler.schedule(() => {
+            ctx.dispatch(new LoadStreamLoadingAddressList(data));
+          });
+        }),
+        catchError(error =>
+          of(
+            asapScheduler.schedule(() =>
+              ctx.dispatch(new LoadAddressListError(generateLoadableError(error.message, error.status)))
+            )
+          )
+        ),
+        finalize(() => {
+            asapScheduler.schedule(() => {
+              ctx.dispatch(new LoadStreamAddressListSuccess());
+            });
+          }
+        ));
+  }
+
   ngxsOnInit(ctx: StateContext<AddressListStateModel>) {
-    ctx.dispatch(new LoadAddressList());
+    ctx.dispatch(new LoadStreamAddressList());
   }
 }

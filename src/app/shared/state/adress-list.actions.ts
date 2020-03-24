@@ -44,3 +44,25 @@ export class LoadAddressListSuccess {
   constructor(public payload: Address[]) {
   }
 }
+
+export class LoadStreamAddressList {
+  static readonly type = '[Address List][Load Stream] Start';
+}
+
+export class LoadStreamLoadingAddressList {
+  static readonly type = '[Address List][Load Stream] Loading';
+
+  constructor(public payload: Address[]) {
+  }
+}
+
+export class LoadStreamAddressListSuccess {
+  static readonly type = '[Address List][Load Stream] Success';
+}
+
+export class LoadStreamAddressListError {
+  static readonly type = '[Address List][Load Stream] Error';
+
+  constructor(public payload: LoadableError) {
+  }
+}

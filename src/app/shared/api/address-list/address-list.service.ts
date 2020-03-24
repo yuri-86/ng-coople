@@ -16,6 +16,10 @@ export class AddressListService {
     return this._fetchAddressList();
   }
 
+  fetchStreamAddressList(): Observable<Address[]> {
+    return this._fetchStreamAddressList();
+  }
+
   /*
      * ==========
      * Overwrite the methods below in mock services in order to isolate the server for tests
@@ -25,6 +29,12 @@ export class AddressListService {
   // TODO: Connect to database, use only the mock service
 
   protected _fetchAddressList(): Observable<Address[]> {
+    return this.http
+      .get<Address[]>(`localhost:4200`)
+      .pipe(catchError((error: any) => throwError(error)));
+  }
+
+  protected _fetchStreamAddressList(): Observable<Address[]> {
     return this.http
       .get<Address[]>(`localhost:4200`)
       .pipe(catchError((error: any) => throwError(error)));
